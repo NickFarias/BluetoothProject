@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/bVoltaMenuWifi"
+			android:onClick="voltaMenuPrincipal"
+			android:src="@drawable/ic_launchervolta"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="match_parent"
+			android:text="Desconectado"
+			android:gravity="right|center_vertical"
+			android:textSize="20sp"
+			android:id="@+id/tvStatusConexao"
+			android:layout_marginRight="15dp"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<TextView
+			android:layout_height="wrap_content"
+			android:textAppearance="?android:attr/textAppearanceMedium"
+			android:layout_width="wrap_content"
+			android:text="IP Servidor:"
+			android:layout_gravity="center_vertical"/>
+
+		<EditText
+			android:layout_height="wrap_content"
+			android:layout_width="wrap_content"
+			android:id="@+id/edtWifi"
+			android:ems="8"
+			android:hint="Ex.: 192.168.1.100"
+			android:maxLines="1"
+			android:layout_marginLeft="10dp"/>
+
+	</LinearLayout>
+
+	<Button
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:text="Conectar"
+		android:id="@+id/bWifi"
+		android:onClick="enviar"/>
+
+</LinearLayout>
+

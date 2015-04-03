@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal"
+		android:id="@+id/llmenubluetooth">
+
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/bVoltaMenuPrincipal"
+			android:onClick="voltaMenuPrincipal"
+			android:src="@drawable/ic_launchervolta"/>
+
+		<TextView
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:text="Dispositivos"
+			android:gravity="center"
+			android:textSize="20sp"
+			android:id="@+id/tvDP"/>
+
+	</LinearLayout>
+
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:text="Disconnect"
+		android:id="@+id/tvStatus"
+		android:gravity="right"
+		android:textSize="15sp"
+		android:paddingRight="10dp"
+		android:layout_below="@+id/llmenubluetooth"/>
+
+	<Button
+		android:id="@+id/bFindDevices"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/tvStatus"
+		android:text="Encontrar dispositivos"
+		android:onClick="encontrarDispositivo"
+		android:layout_marginTop="20dp"
+		android:layout_marginRight="20dp"
+		android:layout_marginLeft="20dp"/>
+
+	<ListView
+		android:id="@+id/lvDispositivos"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:layout_below="@+id/bFindDevices"
+		android:layout_marginTop="15dp">
+
+	</ListView>
+
+</RelativeLayout>
+

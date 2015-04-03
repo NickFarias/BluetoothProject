@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="fill_parent"
+	android:layout_height="fill_parent"
+	android:orientation="vertical"
+	android:name="@+id/llTouch">
+
+	<LinearLayout
+		android:layout_height="wrap_content"
+		android:layout_width="match_parent"
+		android:orientation="horizontal">
+
+		<ImageButton
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:id="@+id/bVoltaMenuBluetooth"
+			android:onClick="voltaMenuBluetooth"
+			android:src="@drawable/ic_launchervolta"/>
+
+	</LinearLayout>
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:orientation="horizontal"
+		android:name="@+id/llMouseButton"
+		android:layout_marginTop="10dp">
+
+		<Button
+			android:id="@+id/bLeftClick"
+			android:layout_width="0.0dip"
+			android:layout_height="wrap_content"
+			android:layout_weight="1.0"
+			android:onClick="leftClick"
+			android:layout_marginRight="10dp"
+			android:layout_marginLeft="10dp"/>
+
+		<Button
+			android:id="@+id/bRightClick"
+			android:layout_width="0.0dip"
+			android:layout_height="wrap_content"
+			android:layout_weight="1.0"
+			android:onClick="rightClick"
+			android:layout_marginLeft="10dp"
+			android:layout_marginRight="10dp"/>
+
+	</LinearLayout>
+
+	<FrameLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:name="@+id/frame">
+
+		<ImageView
+			android:id="@+id/bTouched"
+			android:layout_width="fill_parent"
+			android:layout_height="fill_parent"
+			android:layout_marginTop="10dp"/>
+
+	</FrameLayout>
+
+</LinearLayout>
+
