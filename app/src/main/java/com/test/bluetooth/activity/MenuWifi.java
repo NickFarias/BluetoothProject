@@ -7,17 +7,24 @@ import android.view.*;
 import android.widget.*;
 import java.io.*;
 import java.net.*;
-import android.view.View.*;
 
 public class MenuWifi extends Activity{
 
 	public EditText edtWifi;
-	private Socket socket;
-	private PrintWriter out;
+	public Socket socket;
 	
+
+	private consulta cons;
 	
+	private Thread cThread;
+	private ClientThread cliThread;
+	public OutputStream out;
+	private BufferedWriter bufwriter;
 	
 	public final String TAG = "BluetoothProject";
+	
+	public int SERVERPORT = 4321;
+	public String SERVER_IP = "127.0.0.1";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -25,6 +32,8 @@ public class MenuWifi extends Activity{
 		
 		// TODO: Implement this method
 		super.onCreate(savedInstanceState);
+		
+		
 		setContentView(R.layout.menuwifi);
 		
 		edtWifi = (EditText) findViewById(R.id.edtWifi);
@@ -33,6 +42,8 @@ public class MenuWifi extends Activity{
 			@Override
 			public void onFocusChange(View v, boolean b){
 				
+				if(edtWifi.getText().toString() != null && !edtWifi.getText().toString().equals(""))
+					
 				Toast.makeText(getApplicationContext(), edtWifi.getText().toString(), 0).show();
 			}
 		});
@@ -41,21 +52,23 @@ public class MenuWifi extends Activity{
 	public void enviar(View v){
 		
 		
-		String texto = edtWifi.getText().toString();
-		
-		Toast.makeText(getApplicationContext(), texto, 0).show();
+		SERVER_IP = edtWifi.getText().toString();
 		listenSocket();
-		//out.println(texto);
-		
-		
+
 	}
+		
 	
 	public void listenSocket(){
 		
-		consulta c = new consulta();
-		c.setIp(edtWifi.getText().toString());
-		c.execute();
-		c.write("ttttt");
+		
+			if(cons == null){
+				cons = new consulta();
+				cons.setIp(SERVER_IP);
+				cons.execute();
+			}
+			cons.write("");
+			
+			
 	}
 	
 	public void voltaMenuPrincipal(View v){
@@ -66,14 +79,66 @@ public class MenuWifi extends Activity{
 
 	}
 	
-}
+	
+	class ClientThread implements Runnable {
+
+		@Override
+		public void run() {
+
+			restartSocket();
+
+		}
+		
+		public void restartSocket(){
+			
+			try {
+
+				if(socket == null){
+					InetAddress serverAddr = InetAddress.getByName(SERVER_IP);
+					socket = new Socket(serverAddr, SERVERPORT);
+
+				}
+				//Toast.makeText(getApplicationContext(), "foi", 0).show();
+
+			} catch (UnknownHostException e1) {
+
+				//Toast.makeText(getApplicationContext(), e1.getMessage(), 0).show();
+				e1.printStackTrace();
+			} catch (IOException e1) {
+
+				//Toast.makeText(getApplicationContext(), e1.getMessage(), 0).show();
+
+				e1.printStackTrace();
+			}
+		}
+		public void write(){
+//			
+//			
+//			try
+//			{
+//				if (outwriter == null && socket != null){
+//					outwriter = socket.getOutputStream();
+//				}else if(socket != null){
+//					outwriter.write("test".getBytes());
+//					outwriter.flush();
+//				}else{
+//					
+//					Log.d(TAG, "null socket");
+//				}
+//			}
+//			catch (IOException e)
+//			{}
+		}
+
+	}
+	
 
 class consulta extends AsyncTask<String, String, Boolean>{
 
 	public final String TAG = "BluetoothProject";
 	private String ip;
 	
-	OutputStream out = null;
+	
 
 	public void setIp(String ip){
 		this.ip = ip;
@@ -91,25 +156,26 @@ class consulta extends AsyncTask<String, String, Boolean>{
 		Socket socket = null;
 		
 		
-			try{
+		try{
 
 				Log.d(TAG, "criandoSocket");
 				socket = new Socket(getIp(), 4321);
 				Log.d(TAG, "conectado");
 				out = socket.getOutputStream();
 				//byte[] buffer = new byte[1024];
-				
+				Log.i(TAG, "conexao estabelecida");
 
-			} catch(UnknownHostException e){
+		} catch(UnknownHostException e){
 
 				//Toast.makeText(getApplicationContext(), "host desconhecido", 0).show();
-			} catch(IOException e){
+		} catch(IOException e){
 
 				//Toast.makeText(getApplicationContext(), "sem entrada/saida", 0).show();
-			}
-		
-		
-		
+		}catch(Exception e){
+			
+			
+		}
+
 		return true;
 	}
 
@@ -117,10 +183,18 @@ class consulta extends AsyncTask<String, String, Boolean>{
 		
 		try{
 			
-			out.write(texto.getBytes());
-		}
-		catch (IOException e){
+			out.write("testesss".getBytes());
+			out.flush();
+			Log.d(TAG, "tentativa enviar out");
 			
+			
+
+			if(socket.isBound())
+				edtWifi.setEnabled(false);
+		}
+		catch (Exception e){
+			
+			Log.e(TAG, "out eerroo");
 			
 		}
 	}
@@ -129,10 +203,16 @@ class consulta extends AsyncTask<String, String, Boolean>{
 	protected void onPostExecute(Boolean result)
 	{
 		// TODO: Implement this method
+		try{
 		
-		super.onPostExecute(result);
+			super.onPostExecute(result);
+		}catch(Exception e){
+			Log.e(TAG,e.getMessage());
+		}
 	}
-
 	
 	
 }
+}
+
+
