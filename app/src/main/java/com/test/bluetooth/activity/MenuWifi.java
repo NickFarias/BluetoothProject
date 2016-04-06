@@ -13,6 +13,7 @@ public class MenuWifi extends Activity{
 	public EditText edtWifi;
 	public Socket socket;
 	
+	//Moacir babo
 
 	private consulta cons;
 	
