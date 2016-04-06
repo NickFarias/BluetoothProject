@@ -24,7 +24,7 @@ public class MenuBluetooth extends Activity implements OnItemClickListener, OnTo
 	
 	private ImageView bTouched;
 	private TextView tvStatus;
-
+//eh o ultimo teste nao aguento mais
 	
 	public  BluetoothAdapter btAdapter;
 	private Set<BluetoothDevice> arrayDispositivos;
