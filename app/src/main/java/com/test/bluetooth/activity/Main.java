@@ -11,7 +11,7 @@ import com.test.bluetooth.*;
 public class Main extends Activity 
 {
 	public final String TAG = "BluetoothProject";
-
+//
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
